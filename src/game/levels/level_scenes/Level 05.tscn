@@ -1,0 +1,216 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://src/game/levels/LevelManager.cs" type="Script" id=1]
+[ext_resource path="res://resources/Tileset Environment.tres" type="TileSet" id=2]
+[ext_resource path="res://src/game/interactibles/gem/Gem.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/game/characters/player/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/game/environment/GhostStep.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/game/levels/data/leveldata_resources/LevelData05.tres" type="Resource" id=6]
+[ext_resource path="res://src/game/interactibles/fast_travel/FastTravel.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/cameras/CameraController.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/game/environment/Background.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/game/interactibles/portal/Portal.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/game/interactibles/ghost_step_trigger/GhostStepTrigger.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/game/interactibles/area_of_death/AreaOfDeath.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/game/environment/Brick.tscn" type="PackedScene" id=13]
+
+[sub_resource type="RectangleShape2D" id=11]
+resource_local_to_scene = true
+extents = Vector2( 10, 60 )
+
+[sub_resource type="RectangleShape2D" id=12]
+resource_local_to_scene = true
+
+[sub_resource type="Animation" id=9]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "fade_out"
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 120, 20 )
+
+[node name="Level 05" type="Node2D"]
+script = ExtResource( 1 )
+_levelNumber = 5
+_levelData = ExtResource( 6 )
+
+[node name="Background" parent="." instance=ExtResource( 9 )]
+
+[node name="AnimatedBackground" parent="Background" index="0"]
+frame = 1
+
+[node name="BasicLight" parent="Background/AnimatedBackground" index="0"]
+visible = false
+
+[node name="BasicLight" parent="Background/AnimatedBackground2" index="0"]
+visible = false
+
+[node name="AnimatedBackground3" parent="Background" index="2"]
+frame = 1
+
+[node name="Background" parent="Background" index="3"]
+tile_data = PoolIntArray( -65538, 20, 0, -65537, 20, 0, -131072, 20, 0, -131071, 20, 0, -131070, 20, 0, -131069, 20, 0, -131068, 20, 0, -131067, 20, 0, -131066, 20, 0, -131065, 20, 0, -131064, 20, 0, -131063, 20, 0, -131062, 20, 0, -131061, 20, 0, -131060, 20, 0, -131059, 20, 0, -131058, 20, 0, -131057, 20, 0, -131056, 20, 0, -131055, 20, 0, -131054, 20, 0, -131053, 20, 0, -131052, 20, 0, -131051, 20, 0, -2, 20, 0, -1, 20, 0, -65536, 20, 0, -65535, 20, 0, -65534, 20, 0, -65533, 20, 0, -65532, 20, 0, -65531, 20, 0, -65530, 20, 0, -65529, 20, 0, -65528, 20, 0, -65527, 20, 0, -65526, 20, 0, -65525, 20, 0, -65524, 20, 0, -65523, 20, 0, -65522, 20, 0, -65521, 20, 0, -65520, 20, 0, -65519, 20, 0, -65518, 20, 0, -65517, 20, 0, -65516, 20, 0, -65515, 20, 0, 65534, 20, 0, 65535, 20, 0, 0, 20, 0, 1, 20, 0, 2, 20, 0, 3, 20, 0, 4, 20, 0, 5, 20, 0, 6, 20, 0, 7, 20, 0, 8, 20, 0, 9, 20, 0, 10, 20, 0, 11, 20, 0, 12, 20, 0, 13, 20, 0, 20, 20, 0, 131071, 20, 0, 65536, 20, 0, 65537, 20, 0, 65538, 20, 0, 65539, 20, 0, 65540, 20, 0, 65541, 20, 0, 65542, 20, 0, 65543, 20, 0, 65544, 20, 0, 65545, 20, 0, 65546, 20, 0, 65547, 20, 0, 65548, 20, 0, 65549, 20, 0, 196607, 20, 0, 131072, 20, 0, 131073, 20, 0, 131074, 20, 0, 131075, 20, 0, 131076, 20, 0, 131077, 20, 0, 131078, 20, 0, 131079, 20, 0, 131080, 20, 0, 131081, 20, 0, 131082, 20, 0, 131083, 20, 0, 131084, 20, 0, 131085, 20, 0, 262143, 20, 0, 196608, 20, 0, 196609, 20, 0, 196610, 20, 0, 196611, 20, 0, 196612, 20, 0, 196613, 20, 0, 196614, 20, 0, 196615, 20, 0, 196616, 20, 0, 196617, 20, 0, 196618, 20, 0, 196619, 20, 0, 196620, 20, 0, 196621, 20, 0, 196629, 20, 0, 327678, 20, 0, 327679, 20, 0, 262144, 20, 0, 262145, 20, 0, 262146, 20, 0, 262147, 20, 0, 262148, 20, 0, 262149, 20, 0, 262150, 20, 0, 262151, 20, 0, 262152, 20, 0, 262153, 20, 0, 262154, 20, 0, 262155, 20, 0, 262156, 20, 0, 262165, 20, 0, 393215, 20, 0, 327680, 20, 0, 327681, 20, 0, 327682, 20, 0, 327683, 20, 0, 327684, 20, 0, 327685, 20, 0, 327686, 20, 0, 327687, 20, 0, 327688, 20, 0, 327689, 20, 0, 327690, 20, 0, 327691, 20, 0, 327692, 20, 0, 327693, 20, 0, 327701, 20, 0, 458750, 20, 0, 458751, 20, 0, 393216, 20, 0, 393217, 20, 0, 393218, 20, 0, 393219, 20, 0, 393220, 20, 0, 393221, 20, 0, 393222, 20, 0, 393223, 20, 0, 393224, 20, 0, 393225, 20, 0, 393226, 20, 0, 393227, 20, 0, 393228, 20, 0, 393229, 20, 0, 524286, 20, 0, 524287, 20, 0, 458752, 20, 0, 458753, 20, 0, 458754, 20, 0, 458755, 20, 0, 458756, 20, 0, 458757, 20, 0, 458758, 20, 0, 458759, 20, 0, 458760, 20, 0, 458761, 20, 0, 458762, 20, 0, 458763, 20, 0, 458764, 20, 0, 458765, 20, 0, 589822, 20, 0, 589823, 20, 0, 524288, 20, 0, 524289, 20, 0, 524290, 20, 0, 524291, 20, 0, 524292, 20, 0, 524295, 20, 0, 524296, 20, 0, 524297, 20, 0, 524298, 20, 0, 524299, 20, 0, 524300, 20, 0, 524301, 20, 0, 655358, 20, 0, 655359, 20, 0, 589824, 20, 0, 589825, 20, 0, 589826, 20, 0, 589827, 20, 0, 589828, 20, 0, 589829, 20, 0, 589830, 20, 0, 589831, 20, 0, 589832, 20, 0, 589833, 20, 0, 589834, 20, 0, 589835, 20, 0, 589836, 20, 0, 720894, 20, 0, 720895, 20, 0, 655360, 20, 0, 655361, 20, 0, 655362, 20, 0, 655363, 20, 0, 655364, 20, 0, 655365, 20, 0, 655366, 20, 0, 655367, 20, 0, 655368, 20, 0, 655369, 20, 0, 655370, 20, 0, 655371, 20, 0, 1048574, 20, 0, 1048575, 20, 0, 983040, 20, 0, 983041, 20, 0, 983042, 20, 0, 983043, 20, 0, 983044, 20, 0, 983045, 20, 0, 983046, 20, 0, 983047, 20, 0, 983048, 20, 0, 983049, 20, 0, 983050, 20, 0, 983051, 20, 0, 983052, 20, 0, 983053, 20, 0, 983054, 20, 0, 983055, 20, 0, 983056, 20, 0, 983057, 20, 0, 983058, 20, 0, 983059, 20, 0, 983060, 20, 0, 983061, 20, 0, 1114110, 20, 0, 1114111, 20, 0, 1048576, 20, 0, 1048577, 20, 0, 1048578, 20, 0, 1048579, 20, 0, 1048580, 20, 0, 1048581, 20, 0, 1048582, 20, 0, 1048583, 20, 0, 1048584, 20, 0, 1048585, 20, 0, 1048586, 20, 0, 1048587, 20, 0, 1048588, 20, 0, 1048589, 20, 0, 1048590, 20, 0, 1048591, 20, 0, 1048592, 20, 0, 1048593, 20, 0, 1048594, 20, 0, 1048595, 20, 0, 1048596, 20, 0, 1048597, 20, 0 )
+
+[node name="Foreground" type="TileMap" parent="." groups=["Tiles"]]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 2
+format = 1
+tile_data = PoolIntArray( -524288, 24, 0, -524285, 23, 0, -458752, 24, 0, -458749, 23, 0, -393216, 24, 0, -393213, 23, 0, -327680, 24, 0, -327677, 23, 0, -262144, 24, 0, -262141, 23, 0, -196608, 24, 0, -196605, 23, 0, -131072, 24, 0, -131069, 23, 0, -65536, 24, 0, -65533, 23, 0, 0, 24, 0, 3, 23, 0, 16, 16, 0, 17, 11, 0, 18, 11, 0, 19, 16, 0, 65536, 25, 0, 65539, 22, 0, 65553, 12, 0, 65554, 13, 0, 131072, 24, 0, 131074, 3, 0, 131075, 23, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 196608, 25, 0, 196611, 22, 0, 262144, 24, 0, 262147, 23, 0, 327680, 25, 0, 327683, 22, 0, 393216, 24, 0, 458752, 25, 0, 458758, 16, 0, 458768, 18, 0, 458769, 16, 0, 458770, 16, 0, 458771, 18, 0, 524288, 24, 0, 589824, 25, 0, 655360, 2, 0, 655361, 10, 0, 655362, 2, 0, 655363, 3, 0, 655364, 2, 0, 655365, 10, 0, 655366, 19, 0, 655379, 8, 0, 720896, 6, 0, 720897, 6, 0, 720898, 7, 0, 720899, 6, 0, 720900, 7, 0, 720901, 6, 0, 720902, 7, 0, 720903, 19, 0, 720914, 3, 0, 720915, 2, 0 )
+
+[node name="Bricks" type="Node2D" parent="."]
+
+[node name="Brick" parent="Bricks" instance=ExtResource( 13 )]
+position = Vector2( 24, 40 )
+
+[node name="Brick2" parent="Bricks" instance=ExtResource( 13 )]
+position = Vector2( 40, 120 )
+
+[node name="Brick3" parent="Bricks" instance=ExtResource( 13 )]
+position = Vector2( 72, 120 )
+
+[node name="Gems" type="Node2D" parent="."]
+
+[node name="Gem" parent="Gems" instance=ExtResource( 3 )]
+position = Vector2( 32, 80 )
+
+[node name="Gem2" parent="Gems" instance=ExtResource( 3 )]
+position = Vector2( 160, 100 )
+
+[node name="Portal" parent="." instance=ExtResource( 10 )]
+position = Vector2( 104, 20 )
+
+[node name="FastTravelPoints" type="Node2D" parent="."]
+
+[node name="FastTravelRight" parent="FastTravelPoints" instance=ExtResource( 7 )]
+position = Vector2( 328, 68 )
+_targetDirection = 1
+_otherPos2DNodePath = NodePath("../FastTravelTop/Position2D")
+
+[node name="CollisionShape2D" parent="FastTravelPoints/FastTravelRight" index="0"]
+shape = SubResource( 11 )
+
+[node name="Position2D" parent="FastTravelPoints/FastTravelRight" index="1"]
+position = Vector2( -24, 36 )
+
+[node name="FastTravelTop" parent="FastTravelPoints" instance=ExtResource( 7 )]
+position = Vector2( 120, -16 )
+_otherPos2DNodePath = NodePath("../FastTravelRight/Position2D")
+
+[node name="CollisionShape2D" parent="FastTravelPoints/FastTravelTop" index="0"]
+shape = SubResource( 12 )
+
+[node name="Position2D" parent="FastTravelPoints/FastTravelTop" index="1"]
+position = Vector2( -48, 36 )
+
+[node name="GhostSteps" type="Node2D" parent="."]
+
+[node name="GhostStep1" parent="GhostSteps" instance=ExtResource( 5 )]
+position = Vector2( 160, 120 )
+_triggerPath = NodePath("../GhostStepTrigger1")
+_timerDelay = 2.0
+
+[node name="GhostStep2" parent="GhostSteps" instance=ExtResource( 5 )]
+position = Vector2( 224, 120 )
+_triggerPath = NodePath("../GhostStepTrigger2")
+_timerDelay = 2.0
+
+[node name="CollisionShape2D" parent="GhostSteps/GhostStep2" index="1"]
+disabled = true
+
+[node name="AnimationPlayer" parent="GhostSteps/GhostStep2" index="3"]
+anims/fade_in = SubResource( 9 )
+anims/fade_out = SubResource( 10 )
+
+[node name="GhostStepTrigger1" parent="GhostSteps" instance=ExtResource( 11 )]
+position = Vector2( 104, 104 )
+
+[node name="CollisionShape2D" parent="GhostSteps/GhostStepTrigger1" index="0"]
+shape = SubResource( 8 )
+
+[node name="GhostStepTrigger2" parent="GhostSteps" instance=ExtResource( 11 )]
+position = Vector2( 160, 104 )
+
+[node name="CollisionShape2D" parent="GhostSteps/GhostStepTrigger2" index="0"]
+shape = SubResource( 8 )
+
+[node name="AreasOfDeath" type="Node2D" parent="."]
+
+[node name="AreaOfDeath" parent="AreasOfDeath" instance=ExtResource( 12 )]
+position = Vector2( 24, 168 )
+
+[node name="AreaOfDeath2" parent="AreasOfDeath" instance=ExtResource( 12 )]
+position = Vector2( 88, 168 )
+
+[node name="AreaOfDeath3" parent="AreasOfDeath" instance=ExtResource( 12 )]
+position = Vector2( 224, 212 )
+
+[node name="CollisionShape2D" parent="AreasOfDeath/AreaOfDeath3" index="0"]
+shape = SubResource( 13 )
+
+[node name="Player" parent="." groups=["Player"] instance=ExtResource( 4 )]
+position = Vector2( 32, -44 )
+
+[node name="CameraController" parent="." instance=ExtResource( 8 )]
+
+[editable path="Background"]
+[editable path="FastTravelPoints/FastTravelRight"]
+[editable path="FastTravelPoints/FastTravelTop"]
+[editable path="GhostSteps/GhostStep1"]
+[editable path="GhostSteps/GhostStep2"]
+[editable path="GhostSteps/GhostStepTrigger1"]
+[editable path="GhostSteps/GhostStepTrigger2"]
+[editable path="AreasOfDeath/AreaOfDeath3"]

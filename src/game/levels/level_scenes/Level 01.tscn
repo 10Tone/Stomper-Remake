@@ -1,0 +1,169 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://src/game/levels/LevelManager.cs" type="Script" id=1]
+[ext_resource path="res://src/game/environment/Background.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/fonts/PixelRPG.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://src/game/levels/tutorial_levels/TutorialController.cs" type="Script" id=4]
+[ext_resource path="res://src/fonts/PixelRPG.tres" type="DynamicFont" id=5]
+[ext_resource path="res://src/game/levels/data/leveldata_resources/LevelData01.tres" type="Resource" id=6]
+[ext_resource path="res://assets/environment/brick.png" type="Texture" id=7]
+[ext_resource path="res://src/cameras/CameraController.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/game/characters/player/Player.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/game/environment/Brick.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/game/environment/Crate.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/title.png" type="Texture" id=12]
+[ext_resource path="res://src/game/environment/Foreground.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/game/interactibles/portal/Portal.tscn" type="PackedScene" id=14]
+[ext_resource path="res://src/game/interactibles/TutorialLevelTransition.cs" type="Script" id=15]
+
+[sub_resource type="DynamicFont" id=1]
+size = 10
+extra_spacing_top = 2
+extra_spacing_char = 1
+font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "show_text"
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 24, 12 )
+
+[node name="Tutorial - Level 01" type="Node2D"]
+script = ExtResource( 1 )
+_levelNumber = 1
+_levelData = ExtResource( 6 )
+
+[node name="TutorialController" type="Node2D" parent="."]
+script = ExtResource( 4 )
+_timerPath = NodePath("Timer")
+_textPath = NodePath("CanvasLayer/RichTextLabel")
+_animPath = NodePath("CanvasLayer/RichTextLabel/AnimationPlayer")
+_triggerPath = NodePath("../Bricks/Crate")
+_line01 = "[center]This is Stomper"
+_line02 = "[center]He can move left and right with [color=yellow]A[/color] and [color=yellow]D[/color] "
+_line03 = "[center]He can jump with [color=yellow]SPACE[/color] and duck with [color=yellow]S[/color] "
+_line04 = "[center]And if you hold [color=yellow]S[/color] and press [color=yellow]SPACE[/color] after he turns blue..."
+_line05 = "[center] He does a stomp jump!"
+_line06 = "[center]Try breaking that block over there...."
+_line07 = "[center]Great job!
+"
+_line08 = "[center]Now double jump and when in air press [color=yellow]S[/color]"
+
+[node name="Timer" type="Timer" parent="TutorialController"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="TutorialController"]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TutorialController/CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -70.0
+margin_top = -75.0
+margin_right = 70.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 140, 60 )
+custom_fonts/bold_font = ExtResource( 5 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+visible_characters = 0
+percent_visible = 0.0
+meta_underlined = false
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TutorialController/CanvasLayer/RichTextLabel"]
+anims/show_text = SubResource( 2 )
+
+[node name="Portal" parent="TutorialController/CanvasLayer/RichTextLabel" instance=ExtResource( 14 )]
+position = Vector2( 70, 172 )
+
+[node name="TextureRect" type="TextureRect" parent="TutorialController/CanvasLayer"]
+modulate = Color( 1, 1, 1, 0.388235 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -80.0
+margin_top = 48.0
+margin_right = 192.0
+margin_bottom = 208.0
+rect_scale = Vector2( 0.586844, 0.579368 )
+texture = ExtResource( 12 )
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" parent="." instance=ExtResource( 2 )]
+
+[node name="AnimatedBackground" parent="Background" index="0"]
+frame = 0
+
+[node name="BasicLight" parent="Background/AnimatedBackground" index="0"]
+visible = false
+
+[node name="AnimatedBackground2" parent="Background" index="1"]
+frame = 0
+
+[node name="AnimatedBackground3" parent="Background" index="2"]
+frame = 2
+
+[node name="Background" parent="Background" index="3"]
+tile_data = PoolIntArray( -65538, 20, 0, -65537, 20, 0, -131072, 20, 0, -131071, 20, 0, -131070, 20, 0, -131069, 20, 0, -131068, 20, 0, -131067, 20, 0, -131066, 20, 0, -131065, 20, 0, -131064, 20, 0, -131063, 20, 0, -131062, 20, 0, -131061, 20, 0, -131060, 20, 0, -131059, 20, 0, -131058, 20, 0, -131057, 20, 0, -131056, 20, 0, -131055, 20, 0, -131054, 20, 0, -131053, 20, 0, -131052, 20, 0, -131051, 20, 0, -2, 20, 0, -1, 20, 0, -65536, 20, 0, -65535, 20, 0, -65534, 20, 0, -65533, 20, 0, -65532, 20, 0, -65531, 20, 0, -65530, 20, 0, -65529, 20, 0, -65528, 20, 0, -65527, 20, 0, -65526, 20, 0, -65525, 20, 0, -65524, 20, 0, -65523, 20, 0, -65522, 20, 0, -65521, 20, 0, -65520, 20, 0, -65519, 20, 0, -65518, 20, 0, -65517, 20, 0, -65516, 20, 0, -65515, 20, 0, 20, 20, 0, 196615, 20, 0, 196616, 20, 0, 196617, 20, 0, 196619, 20, 0, 196620, 20, 0, 196629, 20, 0, 262151, 20, 0, 262152, 20, 0, 262153, 20, 0, 262154, 20, 0, 262155, 20, 0, 262156, 20, 0, 262165, 20, 0, 327687, 20, 0, 327688, 20, 0, 327691, 20, 0, 327692, 20, 0, 327701, 20, 0, 393223, 20, 0, 393224, 20, 0, 393227, 20, 0, 393228, 20, 0, 393229, 20, 0, 458757, 20, 0, 458758, 20, 0, 458759, 20, 0, 458760, 20, 0, 458761, 20, 0, 458762, 20, 0, 458763, 20, 0, 458764, 20, 0, 458765, 20, 0, 458766, 20, 0, 524295, 20, 0, 524296, 20, 0, 524297, 20, 0, 524298, 20, 0, 524299, 20, 0, 524300, 20, 0, 589831, 20, 0, 589832, 20, 0, 589833, 20, 0, 589834, 20, 0, 589835, 20, 0, 589836, 20, 0, 655368, 20, 0, 655369, 20, 0, 655370, 20, 0, 655371, 20, 0, 655372, 20, 0, 1048574, 20, 0, 1048575, 20, 0, 983040, 20, 0, 983041, 20, 0, 983042, 20, 0, 983043, 20, 0, 983044, 20, 0, 983045, 20, 0, 983046, 20, 0, 983047, 20, 0, 983048, 20, 0, 983049, 20, 0, 983050, 20, 0, 983051, 20, 0, 983052, 20, 0, 983053, 20, 0, 983054, 20, 0, 983055, 20, 0, 983056, 20, 0, 983057, 20, 0, 983058, 20, 0, 983059, 20, 0, 983060, 20, 0, 983061, 20, 0, 1114110, 20, 0, 1114111, 20, 0, 1048576, 20, 0, 1048577, 20, 0, 1048578, 20, 0, 1048579, 20, 0, 1048580, 20, 0, 1048581, 20, 0, 1048582, 20, 0, 1048583, 20, 0, 1048584, 20, 0, 1048585, 20, 0, 1048586, 20, 0, 1048587, 20, 0, 1048588, 20, 0, 1048589, 20, 0, 1048590, 20, 0, 1048591, 20, 0, 1048592, 20, 0, 1048593, 20, 0, 1048594, 20, 0, 1048595, 20, 0, 1048596, 20, 0, 1048597, 20, 0 )
+
+[node name="Foreground" parent="." instance=ExtResource( 13 )]
+tile_data = PoolIntArray( 4, 25, 0, 15, 22, 0, 65540, 24, 0, 65551, 23, 0, 131076, 25, 0, 131087, 22, 0, 196612, 24, 0, 196623, 23, 0, 262148, 25, 0, 262159, 22, 0, 327684, 24, 0, 327695, 23, 0, 393220, 25, 0, 393231, 22, 0, 458756, 24, 0, 458767, 23, 0, 524292, 25, 0, 524303, 22, 0, 589828, 24, 0, 589839, 23, 0, 655364, 25, 0, 655375, 22, 0, 720896, 3, 0, 720897, 3, 0, 720898, 3, 0, 720899, 3, 0, 720900, 3, 0, 720901, 3, 0, 720902, 3, 0, 720903, 3, 0, 720904, 3, 0, 720907, 3, 0, 720908, 3, 0, 720909, 3, 0, 720910, 3, 0, 720911, 3, 0, 720912, 3, 0, 720913, 3, 0, 720914, 3, 0, 720915, 3, 0 )
+
+[node name="Bricks" type="Node2D" parent="."]
+
+[node name="Crate" parent="Bricks" instance=ExtResource( 11 )]
+position = Vector2( 216, 104 )
+rubbleTexture = ExtResource( 7 )
+
+[node name="Sprite" parent="Bricks/Crate" index="0"]
+texture = ExtResource( 7 )
+
+[node name="Brick2" parent="Bricks" instance=ExtResource( 10 )]
+position = Vector2( 152, 184 )
+_brickType = 1
+_triggerPath = NodePath("../Crate")
+
+[node name="Brick3" parent="Bricks" instance=ExtResource( 10 )]
+position = Vector2( 168, 184 )
+_brickType = 1
+_triggerPath = NodePath("../Crate")
+
+[node name="Player" parent="." groups=["Player"] instance=ExtResource( 9 )]
+position = Vector2( 160, -12 )
+
+[node name="CameraController" parent="." instance=ExtResource( 8 )]
+
+[node name="TutorialLevelTransition" type="Area2D" parent="."]
+position = Vector2( 160, 204 )
+monitorable = false
+script = ExtResource( 15 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TutorialLevelTransition"]
+shape = SubResource( 3 )
+
+[connection signal="body_entered" from="TutorialLevelTransition" to="TutorialLevelTransition" method="_on_Interactible_body_entered"]
+
+[editable path="Background"]
+[editable path="Bricks/Crate"]
+[editable path="Player"]

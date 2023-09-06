@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/fonts/PixelRPG.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/interactibles/gem/gem-empty.png" type="Texture" id=2]
+[ext_resource path="res://src/gui/GemsDisplay.cs" type="Script" id=3]
+[ext_resource path="res://assets/interactibles/gem/gem-taken.png" type="Texture" id=4]
+
+[node name="GemsDisplay" type="HBoxContainer"]
+margin_right = 120.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 120, 22 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+_gemIconsNodePath = NodePath("GemIcons")
+_emptyGemIcon = ExtResource( 2 )
+_collectedGemIcon = ExtResource( 4 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 11.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 11, 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 15.0
+margin_right = 59.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 44, 22 )
+custom_fonts/font = ExtResource( 1 )
+text = "GEMS"
+align = 1
+valign = 1
+
+[node name="GemIcons" type="HBoxContainer" parent="."]
+margin_left = 63.0
+margin_right = 63.0
+margin_bottom = 22.0

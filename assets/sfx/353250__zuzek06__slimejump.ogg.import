@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/353250__zuzek06__slimejump.ogg-bb1ee5282d6dd682171ee8cfafad4709.oggstr"
+
+[deps]
+
+source_file="res://assets/sfx/353250__zuzek06__slimejump.ogg"
+dest_files=[ "res://.import/353250__zuzek06__slimejump.ogg-bb1ee5282d6dd682171ee8cfafad4709.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

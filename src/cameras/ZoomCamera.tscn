@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/cameras/ZoomCamera.cs" type="Script" id=1]
+[ext_resource path="res://src/fx/transition_fx/transition.tres" type="Shader" id=2]
+[ext_resource path="res://src/fx/transition_fx/Transition.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/fx/transition/circle.jpeg" type="Texture" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "zoom"
+length = 3.0
+step = 0.5
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "ZoomIn"
+}, {
+"args": [  ],
+"method": "ZoomOut"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CanvasLayer/Transition:material:shader_param/cutoff")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 1.5, 2, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.8, 0.25, 0.625, 1.0 ]
+}
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 2 )
+shader_param/cutoff = 1.0
+shader_param/smooth_size = 0.167
+shader_param/color = Color( 0.0431373, 0.00784314, 0.0980392, 1 )
+shader_param/mask = ExtResource( 4 )
+
+[node name="ZoomCamera" type="Camera2D"]
+anchor_mode = 0
+script = ExtResource( 1 )
+_zoomTweenPath = NodePath("Tween")
+_animatorPath = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/zoom = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Transition" parent="CanvasLayer" instance=ExtResource( 3 )]
+material = SubResource( 2 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+
+[editable path="CanvasLayer/Transition"]

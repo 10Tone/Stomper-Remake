@@ -1,0 +1,114 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://src/cameras/CameraController.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/game/characters/player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://resources/Tileset Environment.tres" type="TileSet" id=3]
+[ext_resource path="res://src/game/environment/Background.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/game/environment/Brick.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/game/interactibles/gem/Gem.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/game/interactibles/portal/Portal.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/game/levels/LevelManager.cs" type="Script" id=10]
+[ext_resource path="res://src/game/levels/data/leveldata_resources/LevelData03.tres" type="Resource" id=11]
+[ext_resource path="res://src/game/interactibles/fast_travel/FastTravel.cs" type="Script" id=12]
+
+[sub_resource type="RectangleShape2D" id=2]
+resource_local_to_scene = true
+extents = Vector2( 10, 120 )
+
+[sub_resource type="RectangleShape2D" id=3]
+resource_local_to_scene = true
+extents = Vector2( 10, 120 )
+
+[node name="Level 03" type="Node2D"]
+script = ExtResource( 10 )
+_levelNumber = 3
+_levelData = ExtResource( 11 )
+
+[node name="Background" parent="." instance=ExtResource( 4 )]
+
+[node name="AnimatedBackground" parent="Background" index="0"]
+frame = 0
+
+[node name="BasicLight" parent="Background/AnimatedBackground" index="0"]
+visible = false
+
+[node name="Background" parent="Background" index="3"]
+tile_data = PoolIntArray( -65538, 20, 0, -65537, 20, 0, -131072, 20, 0, -131071, 20, 0, -131070, 20, 0, -131069, 20, 0, -131068, 20, 0, -131067, 20, 0, -131066, 20, 0, -131065, 20, 0, -131064, 20, 0, -131063, 20, 0, -131062, 20, 0, -131061, 20, 0, -131060, 20, 0, -131059, 20, 0, -131058, 20, 0, -131057, 20, 0, -131056, 20, 0, -131055, 20, 0, -131054, 20, 0, -131053, 20, 0, -131052, 20, 0, -131051, 20, 0, -2, 20, 0, -1, 20, 0, -65536, 20, 0, -65535, 20, 0, -65534, 20, 0, -65533, 20, 0, -65532, 20, 0, -65531, 20, 0, -65530, 20, 0, -65529, 20, 0, -65528, 20, 0, -65527, 20, 0, -65526, 20, 0, -65525, 20, 0, -65524, 20, 0, -65523, 20, 0, -65522, 20, 0, -65521, 20, 0, -65520, 20, 0, -65519, 20, 0, -65518, 20, 0, -65517, 20, 0, -65516, 20, 0, -65515, 20, 0, 7, 20, 0, 8, 20, 0, 9, 20, 0, 10, 20, 0, 11, 20, 0, 12, 20, 0, 20, 20, 0, 65543, 20, 0, 65544, 20, 0, 65545, 20, 0, 65546, 20, 0, 65547, 20, 0, 65548, 20, 0, 131080, 20, 0, 131081, 20, 0, 131082, 20, 0, 131083, 20, 0, 131084, 20, 0, 196611, 20, 0, 196612, 20, 0, 196614, 20, 0, 196615, 20, 0, 196616, 20, 0, 196617, 20, 0, 196618, 20, 0, 196619, 20, 0, 196620, 20, 0, 196623, 20, 0, 196624, 20, 0, 196629, 20, 0, 262147, 20, 0, 262148, 20, 0, 262150, 20, 0, 262151, 20, 0, 262152, 20, 0, 262153, 20, 0, 262154, 20, 0, 262155, 20, 0, 262156, 20, 0, 262159, 20, 0, 262160, 20, 0, 262165, 20, 0, 327683, 20, 0, 327684, 20, 0, 327687, 20, 0, 327688, 20, 0, 327689, 20, 0, 327690, 20, 0, 327691, 20, 0, 327692, 20, 0, 327695, 20, 0, 327696, 20, 0, 327701, 20, 0, 393219, 20, 0, 393220, 20, 0, 393223, 20, 0, 393224, 20, 0, 393225, 20, 0, 393226, 20, 0, 393227, 20, 0, 393228, 20, 0, 393231, 20, 0, 393232, 20, 0, 458758, 20, 0, 458759, 20, 0, 458760, 20, 0, 458761, 20, 0, 458762, 20, 0, 458763, 20, 0, 458764, 20, 0, 458765, 20, 0, 524295, 20, 0, 524296, 20, 0, 524297, 20, 0, 524298, 20, 0, 524299, 20, 0, 524300, 20, 0, 589831, 20, 0, 589832, 20, 0, 589833, 20, 0, 589834, 20, 0, 589835, 20, 0, 589836, 20, 0, 655368, 20, 0, 655369, 20, 0, 655370, 20, 0, 655371, 20, 0, 655372, 20, 0, 1048574, 20, 0, 1048575, 20, 0, 983040, 20, 0, 983041, 20, 0, 983042, 20, 0, 983043, 20, 0, 983044, 20, 0, 983045, 20, 0, 983046, 20, 0, 983047, 20, 0, 983048, 20, 0, 983049, 20, 0, 983050, 20, 0, 983051, 20, 0, 983052, 20, 0, 983053, 20, 0, 983054, 20, 0, 983055, 20, 0, 983056, 20, 0, 983057, 20, 0, 983058, 20, 0, 983059, 20, 0, 983060, 20, 0, 983061, 20, 0, 1114110, 20, 0, 1114111, 20, 0, 1048576, 20, 0, 1048577, 20, 0, 1048578, 20, 0, 1048579, 20, 0, 1048580, 20, 0, 1048581, 20, 0, 1048582, 20, 0, 1048583, 20, 0, 1048584, 20, 0, 1048585, 20, 0, 1048586, 20, 0, 1048587, 20, 0, 1048588, 20, 0, 1048589, 20, 0, 1048590, 20, 0, 1048591, 20, 0, 1048592, 20, 0, 1048593, 20, 0, 1048594, 20, 0, 1048595, 20, 0, 1048596, 20, 0, 1048597, 20, 0 )
+
+[node name="Foreground" type="TileMap" parent="." groups=["Tiles"]]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 2
+format = 1
+tile_data = PoolIntArray( -786427, 24, 0, -786418, 23, 0, -720891, 24, 0, -720882, 23, 0, -655355, 24, 0, -655346, 23, 0, -589819, 24, 0, -589810, 23, 0, -524283, 24, 0, -524274, 23, 0, -458747, 25, 0, -458738, 23, 0, -393211, 25, 0, -393202, 23, 0, -327675, 25, 0, -327671, 0, 0, -327670, 0, 0, -327666, 23, 0, -262139, 25, 0, -262135, 0, 0, -262134, 0, 0, -262130, 23, 0, -196603, 25, 0, -196599, 0, 0, -196598, 0, 0, -196594, 23, 0, -131067, 24, 0, -131063, 0, 0, -131062, 0, 0, -131058, 23, 0, -65531, 25, 0, -65527, 0, 0, -65526, 0, 0, -65522, 23, 0, 1, 11, 0, 2, 11, 0, 5, 24, 0, 9, 0, 0, 10, 0, 0, 14, 23, 0, 17, 11, 0, 18, 11, 0, 65537, 12, 0, 65538, 13, 0, 65541, 25, 0, 65545, 0, 0, 65546, 0, 0, 65550, 22, 0, 65553, 12, 0, 65554, 13, 0, 131077, 24, 0, 131081, 0, 0, 131082, 0, 0, 131086, 23, 0, 196613, 25, 0, 196617, 0, 0, 196618, 0, 0, 196622, 22, 0, 262149, 24, 0, 262153, 0, 0, 262154, 3, 0, 262158, 23, 0, 327685, 25, 0, 327689, 0, 0, 327690, 0, 0, 327694, 22, 0, 393221, 24, 0, 393225, 0, 0, 393226, 0, 0, 393230, 23, 0, 458752, 3, 0, 458753, 3, 0, 458754, 3, 0, 458755, 3, 0, 458756, 3, 0, 458757, 25, 0, 458761, 0, 0, 458762, 0, 0, 524297, 0, 0, 524298, 0, 0, 589833, 0, 0, 589834, 0, 0, 655369, 0, 0, 655370, 0, 0, 655371, 8, 0, 655378, 8, 0, 786427, 2, 0, 786428, 2, 0, 786429, 2, 0, 786430, 2, 0, 786431, 2, 0, 720896, 2, 0, 720897, 2, 0, 720898, 2, 0, 720899, 2, 0, 720900, 2, 0, 720901, 2, 0, 720902, 2, 0, 720903, 2, 0, 720904, 2, 0, 720905, 2, 0, 720906, 2, 0, 720907, 2, 0, 720908, 2, 0, 720909, 2, 0, 720910, 2, 0, 720911, 2, 0, 720912, 2, 0, 720913, 2, 0, 720914, 2, 0, 720915, 2, 0, 720916, 2, 0, 720917, 2, 0, 720918, 2, 0, 720919, 2, 0, 720920, 2, 0, 720921, 2, 0 )
+
+[node name="Bricks" type="Node2D" parent="."]
+
+[node name="Brick2" parent="Bricks" instance=ExtResource( 7 )]
+position = Vector2( 120, 72 )
+
+[node name="Brick6" parent="Bricks" instance=ExtResource( 7 )]
+position = Vector2( 104, 72 )
+
+[node name="Brick3" parent="Bricks" instance=ExtResource( 7 )]
+position = Vector2( 136, 72 )
+
+[node name="Brick4" parent="Bricks" instance=ExtResource( 7 )]
+position = Vector2( 184, 72 )
+
+[node name="Brick5" parent="Bricks" instance=ExtResource( 7 )]
+position = Vector2( 200, 72 )
+
+[node name="Brick7" parent="Bricks" instance=ExtResource( 7 )]
+position = Vector2( 216, 72 )
+
+[node name="Gems" type="Node2D" parent="."]
+
+[node name="Gem" parent="Gems" instance=ExtResource( 8 )]
+position = Vector2( 104, 72 )
+
+[node name="Gem2" parent="Gems" instance=ExtResource( 8 )]
+position = Vector2( 184, 72 )
+
+[node name="Portal" parent="." instance=ExtResource( 9 )]
+position = Vector2( 64, 100 )
+
+[node name="FastTravelPoints" type="Node2D" parent="."]
+
+[node name="FastTravelLeft" type="Area2D" parent="FastTravelPoints"]
+position = Vector2( -24, 144 )
+collision_layer = 0
+monitorable = false
+script = ExtResource( 12 )
+_otherPos2DNodePath = NodePath("../FastTravelRight/Position2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FastTravelPoints/FastTravelLeft"]
+position = Vector2( 0, -72 )
+shape = SubResource( 2 )
+
+[node name="Position2D" type="Position2D" parent="FastTravelPoints/FastTravelLeft"]
+position = Vector2( 32, 0 )
+
+[node name="FastTravelRight" type="Area2D" parent="FastTravelPoints"]
+position = Vector2( 344, 144 )
+collision_layer = 0
+monitorable = false
+script = ExtResource( 12 )
+_otherPos2DNodePath = NodePath("../FastTravelLeft/Position2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FastTravelPoints/FastTravelRight"]
+position = Vector2( 0, -72 )
+shape = SubResource( 3 )
+
+[node name="Position2D" type="Position2D" parent="FastTravelPoints/FastTravelRight"]
+position = Vector2( -32, 0 )
+
+[node name="Player" parent="." groups=["Player"] instance=ExtResource( 2 )]
+position = Vector2( 108, -56 )
+
+[node name="CameraController" parent="." instance=ExtResource( 1 )]
+
+[connection signal="body_entered" from="FastTravelPoints/FastTravelLeft" to="FastTravelPoints/FastTravelLeft" method="_on_Interactible_body_entered"]
+[connection signal="body_entered" from="FastTravelPoints/FastTravelRight" to="FastTravelPoints/FastTravelRight" method="_on_Interactible_body_entered"]
+
+[editable path="Background"]

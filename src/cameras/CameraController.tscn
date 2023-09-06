@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/cameras/ShakeCamera2D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/cameras/CameraController.cs" type="Script" id=2]
+[ext_resource path="res://src/cameras/ZoomCamera.tscn" type="PackedScene" id=3]
+
+[node name="CameraController" type="Node2D"]
+script = ExtResource( 2 )
+_normalCamPath = NodePath("NormalCamera")
+_shakeCamPath = NodePath("ShakeCamera2D")
+_zoomCamPath = NodePath("ZoomCamera")
+
+[node name="NormalCamera" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+
+[node name="ShakeCamera2D" parent="." instance=ExtResource( 1 )]
+anchor_mode = 0
+_decay = 0.75
+_maxOffset = Vector2( 15, 35 )
+
+[node name="ZoomCamera" parent="." instance=ExtResource( 3 )]
+offset = Vector2( 160, 120 )
+anchor_mode = 1

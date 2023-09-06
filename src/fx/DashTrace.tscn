@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/characters/player/Roll/trace.png" type="Texture" id=1]
+[ext_resource path="res://src/fx/DashTrace.cs" type="Script" id=2]
+
+[node name="DashTrace" type="Sprite"]
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]
+playback_process_mode = 0
+
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]

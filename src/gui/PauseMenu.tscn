@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/gui/button_theme.tres" type="Theme" id=1]
+[ext_resource path="res://src/gui/PauseMenu.cs" type="Script" id=2]
+
+[node name="PauseMenu" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 2 )
+_popupPath = NodePath("MarginContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
+margin_right = 320.0
+margin_bottom = 240.0
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/CenterContainer"]
+margin_left = 60.0
+margin_top = 60.0
+margin_right = 260.0
+margin_bottom = 180.0
+rect_min_size = Vector2( 200, 120 )
+color = Color( 0.0431373, 0.00784314, 0.0980392, 0.737255 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer"]
+margin_left = 134.0
+margin_top = 98.0
+margin_right = 186.0
+margin_bottom = 142.0
+custom_constants/separation = 16
+
+[node name="ResumeButton" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer"]
+margin_right = 52.0
+margin_bottom = 14.0
+focus_mode = 0
+theme = ExtResource( 1 )
+text = "RESUME"
+
+[node name="ExitButton" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer"]
+margin_top = 30.0
+margin_right = 52.0
+margin_bottom = 44.0
+focus_mode = 0
+theme = ExtResource( 1 )
+text = "EXIT"
+
+[connection signal="button_down" from="MarginContainer/CenterContainer/VBoxContainer/ResumeButton" to="." method="_on_ResumeButton_button_down"]
+[connection signal="button_down" from="MarginContainer/CenterContainer/VBoxContainer/ExitButton" to="." method="_on_ExitButton_button_down"]

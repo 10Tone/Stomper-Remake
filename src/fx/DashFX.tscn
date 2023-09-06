@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/fx/DashFX.cs" type="Script" id=1]
+[ext_resource path="res://src/fx/DashTrace.tscn" type="PackedScene" id=2]
+
+[node name="DashFX" type="Node2D"]
+script = ExtResource( 1 )
+_dashTracePackedScene = ExtResource( 2 )
+_timerPath = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.01

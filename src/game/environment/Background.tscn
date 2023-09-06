@@ -1,0 +1,139 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/environment/background/back-animated3.png" type="Texture" id=1]
+[ext_resource path="res://assets/environment/background/back-animated2.png" type="Texture" id=2]
+[ext_resource path="res://assets/environment/background/back-animated1.png" type="Texture" id=3]
+[ext_resource path="res://resources/Tileset Environment.tres" type="TileSet" id=4]
+[ext_resource path="res://src/game/environment/BasicLight.tscn" type="PackedScene" id=5]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 2 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=2]
+resource_name = "light_flicker"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("BasicLight:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.7, 1.1, 1.4, 1.7, 1.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 1.4, 0.5, 1.0, 1.6, 1.36, 1.2 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "light_flicker"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("BasicLight:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.7, 1.1, 1.4, 1.7, 1.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 1.4, 0.5, 1.0, 1.6, 1.36, 1.2 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "light_flicker"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("BasicLight:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.7, 1.1, 1.4, 1.7, 1.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 1.4, 0.5, 1.0, 1.6, 1.36, 1.2 ]
+}
+
+[node name="Background" type="Node2D"]
+
+[node name="AnimatedBackground" type="AnimatedSprite" parent="."]
+position = Vector2( 160, 120 )
+frames = SubResource( 1 )
+frame = 2
+speed_scale = 0.75
+playing = true
+
+[node name="BasicLight" parent="AnimatedBackground" instance=ExtResource( 5 )]
+position = Vector2( 0, 24 )
+z_index = 2
+texture_scale = 0.05
+color = Color( 1, 0.85098, 0.407843, 1 )
+energy = 0.890759
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedBackground"]
+autoplay = "light_flicker"
+playback_speed = 0.85
+anims/light_flicker = SubResource( 2 )
+
+[node name="AnimatedBackground2" type="AnimatedSprite" parent="."]
+position = Vector2( 32, 120 )
+frames = SubResource( 1 )
+frame = 2
+speed_scale = 0.85
+playing = true
+
+[node name="BasicLight" parent="AnimatedBackground2" instance=ExtResource( 5 )]
+position = Vector2( 0, 24 )
+z_index = 2
+texture_scale = 0.05
+color = Color( 1, 0.85098, 0.407843, 1 )
+energy = 1.27787
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedBackground2"]
+autoplay = "light_flicker"
+anims/light_flicker = SubResource( 3 )
+
+[node name="AnimatedBackground3" type="AnimatedSprite" parent="."]
+position = Vector2( 288, 120 )
+frames = SubResource( 1 )
+speed_scale = 0.78
+playing = true
+
+[node name="BasicLight" parent="AnimatedBackground3" instance=ExtResource( 5 )]
+position = Vector2( 0, 24 )
+z_index = 2
+texture_scale = 0.05
+color = Color( 1, 0.85098, 0.407843, 1 )
+energy = 1.35406
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedBackground3"]
+autoplay = "light_flicker"
+playback_speed = 0.98
+anims/light_flicker = SubResource( 4 )
+
+[node name="Background" type="TileMap" parent="."]
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( -65538, 20, 0, -65537, 20, 0, -131072, 20, 0, -131071, 20, 0, -131070, 20, 0, -131069, 20, 0, -131068, 20, 0, -131067, 20, 0, -131066, 20, 0, -131065, 20, 0, -131064, 20, 0, -131063, 20, 0, -131062, 20, 0, -131061, 20, 0, -131060, 20, 0, -131059, 20, 0, -131058, 20, 0, -131057, 20, 0, -131056, 20, 0, -131055, 20, 0, -131054, 20, 0, -131053, 20, 0, -131052, 20, 0, -131051, 20, 0, -2, 20, 0, -1, 20, 0, -65536, 20, 0, -65535, 20, 0, -65534, 20, 0, -65533, 20, 0, -65532, 20, 0, -65531, 20, 0, -65530, 20, 0, -65529, 20, 0, -65528, 20, 0, -65527, 20, 0, -65526, 20, 0, -65525, 20, 0, -65524, 20, 0, -65523, 20, 0, -65522, 20, 0, -65521, 20, 0, -65520, 20, 0, -65519, 20, 0, -65518, 20, 0, -65517, 20, 0, -65516, 20, 0, -65515, 20, 0, 20, 20, 0, 196629, 20, 0, 262165, 20, 0, 327701, 20, 0, 1048574, 20, 0, 1048575, 20, 0, 983040, 20, 0, 983041, 20, 0, 983042, 20, 0, 983043, 20, 0, 983044, 20, 0, 983045, 20, 0, 983046, 20, 0, 983047, 20, 0, 983048, 20, 0, 983049, 20, 0, 983050, 20, 0, 983051, 20, 0, 983052, 20, 0, 983053, 20, 0, 983054, 20, 0, 983055, 20, 0, 983056, 20, 0, 983057, 20, 0, 983058, 20, 0, 983059, 20, 0, 983060, 20, 0, 983061, 20, 0, 1114110, 20, 0, 1114111, 20, 0, 1048576, 20, 0, 1048577, 20, 0, 1048578, 20, 0, 1048579, 20, 0, 1048580, 20, 0, 1048581, 20, 0, 1048582, 20, 0, 1048583, 20, 0, 1048584, 20, 0, 1048585, 20, 0, 1048586, 20, 0, 1048587, 20, 0, 1048588, 20, 0, 1048589, 20, 0, 1048590, 20, 0, 1048591, 20, 0, 1048592, 20, 0, 1048593, 20, 0, 1048594, 20, 0, 1048595, 20, 0, 1048596, 20, 0, 1048597, 20, 0 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.176471 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

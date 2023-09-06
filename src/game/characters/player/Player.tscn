@@ -1,0 +1,132 @@
+[gd_scene load_steps=29 format=2]
+
+[ext_resource path="res://src/game/characters/player/Player.cs" type="Script" id=1]
+[ext_resource path="res://assets/characters/player/run/run8.png" type="Texture" id=2]
+[ext_resource path="res://assets/characters/player/run/run1.png" type="Texture" id=3]
+[ext_resource path="res://assets/characters/player/run/run7.png" type="Texture" id=4]
+[ext_resource path="res://assets/characters/player/run/run9.png" type="Texture" id=5]
+[ext_resource path="res://assets/characters/player/run/run2.png" type="Texture" id=6]
+[ext_resource path="res://assets/characters/player/run/run6.png" type="Texture" id=7]
+[ext_resource path="res://assets/characters/player/run/run10.png" type="Texture" id=8]
+[ext_resource path="res://assets/characters/player/run/run5.png" type="Texture" id=9]
+[ext_resource path="res://assets/characters/player/run/run4.png" type="Texture" id=10]
+[ext_resource path="res://assets/characters/player/run/run3.png" type="Texture" id=11]
+[ext_resource path="res://src/game/characters/player/PlayerInputHandler.cs" type="Script" id=12]
+[ext_resource path="res://src/game/characters/player/data/PlayerData.tres" type="Resource" id=13]
+[ext_resource path="res://assets/characters/player/Air/Jump.png" type="Texture" id=14]
+[ext_resource path="res://assets/characters/player/Air/fall.png" type="Texture" id=15]
+[ext_resource path="res://assets/characters/player/Duck/duck.png" type="Texture" id=16]
+[ext_resource path="res://assets/characters/player/Duck/duck1.png" type="Texture" id=17]
+[ext_resource path="res://assets/characters/player/Roll/Roll3.png" type="Texture" id=18]
+[ext_resource path="res://assets/characters/player/Roll/Roll2.png" type="Texture" id=19]
+[ext_resource path="res://assets/characters/player/Roll/Roll1.png" type="Texture" id=20]
+[ext_resource path="res://src/fx/DashFX.tscn" type="PackedScene" id=21]
+[ext_resource path="res://src/fx/DustFX.tscn" type="PackedScene" id=22]
+[ext_resource path="res://assets/characters/player/Duck/duck2.png" type="Texture" id=23]
+[ext_resource path="res://src/game/environment/BasicLight.tscn" type="PackedScene" id=24]
+[ext_resource path="res://assets/sfx/353250__zuzek06__slimejump.ogg" type="AudioStream" id=25]
+[ext_resource path="res://src/game/characters/player/PlayerAudioHandler.cs" type="Script" id=26]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 17 ) ],
+"loop": true,
+"name": "duck",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 15 ) ],
+"loop": true,
+"name": "fall",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ) ],
+"loop": true,
+"name": "in_air",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 16 ) ],
+"loop": false,
+"name": "land",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 6 ), ExtResource( 11 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 5 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "move",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 20 ), ExtResource( 19 ), ExtResource( 18 ) ],
+"loop": true,
+"name": "roll",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 20 ), ExtResource( 19 ), ExtResource( 18 ) ],
+"loop": true,
+"name": "stomp",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 17 ), ExtResource( 23 ) ],
+"loop": true,
+"name": "stomp_jump_loading",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 5.5
+height = 3.0
+
+[node name="Player" type="KinematicBody2D"]
+z_index = 1
+collision_mask = 30
+collision/safe_margin = 0.1
+script = ExtResource( 1 )
+_playerData = ExtResource( 13 )
+_inputHandlerPath = NodePath("PlayerInputHandler")
+_animatedSpritePath = NodePath("AnimatedSprite")
+_dashFxPath = NodePath("DashFX")
+_dustFxPath = NodePath("DustFX")
+_rayPath = NodePath("RayCast2D")
+
+[node name="PlayerInputHandler" type="Node" parent="."]
+script = ExtResource( 12 )
+_inputHoldTime = 0.2
+
+[node name="BasicLight" parent="." instance=ExtResource( 24 )]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+light_mask = 0
+position = Vector2( -1, 0 )
+frames = SubResource( 1 )
+animation = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 3 )
+shape = SubResource( 2 )
+
+[node name="DashFX" parent="." instance=ExtResource( 21 )]
+
+[node name="DustFX" parent="." instance=ExtResource( 22 )]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 12, 0 )
+collision_mask = 2
+
+[node name="PlayerAudioHandler" type="Node2D" parent="."]
+script = ExtResource( 26 )
+_jumpAudioPath = NodePath("Jump")
+
+[node name="Jump" type="AudioStreamPlayer" parent="PlayerAudioHandler"]
+stream = ExtResource( 25 )
+bus = "Sfx"
+
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

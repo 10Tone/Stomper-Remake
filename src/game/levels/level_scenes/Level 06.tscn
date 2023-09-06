@@ -1,0 +1,108 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://src/game/levels/LevelManager.cs" type="Script" id=1]
+[ext_resource path="res://src/game/environment/Background.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/fonts/PixelRPG.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://src/game/levels/data/leveldata_resources/LevelData06.tres" type="Resource" id=4]
+[ext_resource path="res://src/gui/button_theme.tres" type="Theme" id=5]
+[ext_resource path="res://src/gui/ExitButtonCredits.cs" type="Script" id=6]
+[ext_resource path="res://assets/title.png" type="Texture" id=12]
+[ext_resource path="res://src/game/environment/Foreground.tscn" type="PackedScene" id=13]
+
+[sub_resource type="DynamicFont" id=1]
+size = 7
+extra_spacing_top = 2
+font_data = ExtResource( 3 )
+
+[node name="Credits - Level 06" type="Node2D"]
+script = ExtResource( 1 )
+_levelNumber = 6
+_levelData = ExtResource( 4 )
+
+[node name="Background" parent="." instance=ExtResource( 2 )]
+
+[node name="BasicLight" parent="Background/AnimatedBackground" index="0"]
+visible = false
+
+[node name="AnimatedBackground2" parent="Background" index="1"]
+frame = 1
+
+[node name="Background" parent="Background" index="3"]
+tile_data = PoolIntArray( -65538, 20, 0, -65537, 20, 0, -131072, 20, 0, -131071, 20, 0, -131070, 20, 0, -131069, 20, 0, -131068, 20, 0, -131067, 20, 0, -131066, 20, 0, -131065, 20, 0, -131064, 20, 0, -131063, 20, 0, -131062, 20, 0, -131061, 20, 0, -131060, 20, 0, -131059, 20, 0, -131058, 20, 0, -131057, 20, 0, -131056, 20, 0, -131055, 20, 0, -131054, 20, 0, -131053, 20, 0, -131052, 20, 0, -131051, 20, 0, -2, 20, 0, -1, 20, 0, -65536, 20, 0, -65535, 20, 0, -65534, 20, 0, -65533, 20, 0, -65532, 20, 0, -65531, 20, 0, -65530, 20, 0, -65529, 20, 0, -65528, 20, 0, -65527, 20, 0, -65526, 20, 0, -65525, 20, 0, -65524, 20, 0, -65523, 20, 0, -65522, 20, 0, -65521, 20, 0, -65520, 20, 0, -65519, 20, 0, -65518, 20, 0, -65517, 20, 0, -65516, 20, 0, -65515, 20, 0, 20, 20, 0, 196615, 20, 0, 196616, 20, 0, 196617, 20, 0, 196619, 20, 0, 196620, 20, 0, 196629, 20, 0, 262151, 20, 0, 262152, 20, 0, 262153, 20, 0, 262154, 20, 0, 262155, 20, 0, 262156, 20, 0, 262165, 20, 0, 327687, 20, 0, 327688, 20, 0, 327691, 20, 0, 327692, 20, 0, 327701, 20, 0, 393223, 20, 0, 393224, 20, 0, 393227, 20, 0, 393228, 20, 0, 393229, 20, 0, 458757, 20, 0, 458758, 20, 0, 458759, 20, 0, 458760, 20, 0, 458761, 20, 0, 458762, 20, 0, 458763, 20, 0, 458764, 20, 0, 458765, 20, 0, 458766, 20, 0, 524295, 20, 0, 524296, 20, 0, 524297, 20, 0, 524298, 20, 0, 524299, 20, 0, 524300, 20, 0, 589831, 20, 0, 589832, 20, 0, 589833, 20, 0, 589834, 20, 0, 589835, 20, 0, 589836, 20, 0, 655368, 20, 0, 655369, 20, 0, 655370, 20, 0, 655371, 20, 0, 655372, 20, 0, 1048574, 20, 0, 1048575, 20, 0, 983040, 20, 0, 983041, 20, 0, 983042, 20, 0, 983043, 20, 0, 983044, 20, 0, 983045, 20, 0, 983046, 20, 0, 983047, 20, 0, 983048, 20, 0, 983049, 20, 0, 983050, 20, 0, 983051, 20, 0, 983052, 20, 0, 983053, 20, 0, 983054, 20, 0, 983055, 20, 0, 983056, 20, 0, 983057, 20, 0, 983058, 20, 0, 983059, 20, 0, 983060, 20, 0, 983061, 20, 0, 1114110, 20, 0, 1114111, 20, 0, 1048576, 20, 0, 1048577, 20, 0, 1048578, 20, 0, 1048579, 20, 0, 1048580, 20, 0, 1048581, 20, 0, 1048582, 20, 0, 1048583, 20, 0, 1048584, 20, 0, 1048585, 20, 0, 1048586, 20, 0, 1048587, 20, 0, 1048588, 20, 0, 1048589, 20, 0, 1048590, 20, 0, 1048591, 20, 0, 1048592, 20, 0, 1048593, 20, 0, 1048594, 20, 0, 1048595, 20, 0, 1048596, 20, 0, 1048597, 20, 0 )
+
+[node name="Foreground" parent="." instance=ExtResource( 13 )]
+tile_data = PoolIntArray( 4, 25, 0, 15, 22, 0, 65540, 24, 0, 65551, 23, 0, 131076, 25, 0, 131087, 22, 0, 196612, 24, 0, 196623, 23, 0, 262148, 25, 0, 262159, 22, 0, 327684, 24, 0, 327695, 23, 0, 393220, 25, 0, 393231, 22, 0, 458756, 24, 0, 458767, 23, 0, 524292, 25, 0, 524303, 22, 0, 589828, 24, 0, 589839, 23, 0, 655364, 25, 0, 655375, 22, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0.388235 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 80.0
+margin_top = 168.0
+margin_right = 352.0
+margin_bottom = 328.0
+rect_scale = Vector2( 0.586844, 0.579368 )
+texture = ExtResource( 12 )
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -80.0
+margin_top = -80.0
+margin_right = 80.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 160, 160 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+margin_right = 160.0
+margin_bottom = 160.0
+custom_constants/separation = 6
+
+[node name="Label" type="RichTextLabel" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+margin_right = 160.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 160, 120 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Thank you for playing Stomper DEMO.
+
+ This game is inspired by a game made by Ansimuz.
+[url]https://ansimuz.itch.io/stomper[/url]
+
+Programming and deisgn by Ruurt Staverman.
+
+Art by Ansimuz."
+text = "Thank you for playing Stomper DEMO.
+
+ This game is inspired by a game made by Ansimuz.
+https://ansimuz.itch.io/stomper
+
+Programming and deisgn by Ruurt Staverman.
+
+Art by Ansimuz."
+scroll_active = false
+
+[node name="ExitButton" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+margin_top = 126.0
+margin_right = 160.0
+margin_bottom = 140.0
+theme = ExtResource( 5 )
+text = "EXIT"
+script = ExtResource( 6 )
+
+[connection signal="button_down" from="CanvasLayer/MarginContainer/VBoxContainer/ExitButton" to="CanvasLayer/MarginContainer/VBoxContainer/ExitButton" method="_on_ExitButton_button_down"]
+
+[editable path="Background"]

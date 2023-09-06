@@ -1,0 +1,137 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://src/game/interactibles/gem/Gem.cs" type="Script" id=7]
+[ext_resource path="res://assets/interactibles/gem/gem-feedback.png" type="Texture" id=8]
+[ext_resource path="res://src/game/environment/BasicLight.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/interactibles/gem/gem_shine.png" type="Texture" id=10]
+
+[sub_resource type="Animation" id=6]
+resource_name = "idle"
+length = 2.0
+loop = true
+step = 0.166667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.83333, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.5, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Idle:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 1.16667, 1.33333, 1.5, 1.66667, 1.83333, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 0, 1, 2, 3, 4, 5, 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Idle:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../PickedUp:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "picked_up"
+length = 0.5
+step = 0.166667
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Idle:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../PickedUp:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../PickedUp:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.166667, 0.333333 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 6.0
+
+[node name="Gem" type="Area2D"]
+collision_layer = 0
+monitorable = false
+script = ExtResource( 7 )
+_animNodePath = NodePath("AnimationPlayer")
+
+[node name="Idle" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 10 )
+hframes = 6
+
+[node name="PickedUp" type="Sprite" parent="."]
+texture = ExtResource( 8 )
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../BasicLight")
+autoplay = "idle"
+anims/idle = SubResource( 6 )
+anims/picked_up = SubResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 3
+shape = SubResource( 2 )
+
+[node name="BasicLight" parent="." instance=ExtResource( 9 )]
+texture_scale = 0.05
+color = Color( 1, 0.462745, 0.462745, 1 )
+energy = 0.0
+
+[connection signal="body_entered" from="." to="." method="_on_Interactible_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
