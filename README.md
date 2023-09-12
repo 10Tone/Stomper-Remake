@@ -7,7 +7,11 @@
 ### Programming and design by Ruurt Staverman.
 #### Art by Ansimuz.
 
-https://github.com/10Tone/Stomper-Remake/assets/69433105/50371db6-484b-4363-a41c-5ed662d641bd
+
+
+
+https://github.com/10Tone/Stomper-Remake/assets/69433105/a03af3c5-5612-4e2d-9ad7-23ba333a8bb4
+
 
 
 
